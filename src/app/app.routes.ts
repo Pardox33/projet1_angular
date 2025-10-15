@@ -10,4 +10,3 @@ const routes: Routes = [
     { path: "update-produit/:id", component: UpdateProduit },
     { path: "", redirectTo: "produits", pathMatch: "full" }
 ]; export default routes;
-
