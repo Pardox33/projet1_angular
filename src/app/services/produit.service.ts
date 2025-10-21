@@ -8,6 +8,9 @@ import { Categorie } from '../model/categorie.model';
 export class ProduitService {
   produits: Produit[];
   categories: Categorie[];
+  produitsRecherche!:Produit[];
+  produitsRechercheNom!:Produit[];
+
   constructor() {
     //console.log("Création du service ProduitService");
     this.categories=[ 
@@ -22,6 +25,7 @@ export class ProduitService {
       {idProduit: 3, nomProduit: "Tablette Samsung", prixProduit: 900.123, dateCreation: new Date("02/20/2020"),categorie: {idCat : 3, nomCat : "Tablette"}}
     ];
   }
+
   listeProduit(): Produit[] {
     return this.produits;
   }
@@ -57,5 +61,26 @@ export class ProduitService {
   }
   consulterCategorie(id: number): Categorie {
     return this.categories.find(cat => cat.idCat == id)!;
+  }
+
+  rechercherParCategorie(idCat: number): Produit[] {
+    this.produitsRecherche=[];
+    this.produits.forEach((cur, index) => {
+      if(idCat == cur.categorie?.idCat) {
+        this.produitsRecherche.push(cur);
+      }
+    });
+    return this.produitsRecherche;
+  }
+
+  rechercherParNom(nom: string): Produit[] {
+    this.produitsRechercheNom=[];
+    this.produits.forEach((cur, index) => {
+      if(cur.nomProduit?.toLowerCase().includes(nom.toLowerCase())) {
+        this.produitsRechercheNom.push(cur);
+      }
+    });
+    
+    return this.produitsRechercheNom;
   }
 }

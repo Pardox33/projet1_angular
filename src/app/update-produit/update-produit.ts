@@ -24,12 +24,12 @@ export class UpdateProduit implements OnInit {
     //console.log(this.activatedRoute.snapshot.params['id']);
     this.currentProduit =this.produitService.consulterProduit(this.activatedRoute.snapshot.params['id']);
     //console.log(this.currentProduit);
-    this.updatedCatId! = this.currentProduit.categorie?.idCat??0;
+    this.updatedCatId! = this.currentProduit.categorie?.idCat??-1;
   }
   updateProduit(){
     //console.log(this.currentProduit);
     this.currentProduit.categorie=this.produitService.consulterCategorie(this.updatedCatId);
     this.produitService.updateProduit(this.currentProduit);
     this.router.navigate(['produits']);
-}
+  }
 }
